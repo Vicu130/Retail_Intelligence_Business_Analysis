@@ -1,0 +1,28 @@
+import os
+from pathlib import Path
+from urllib.parse import quote_plus
+
+from dotenv import load_dotenv
+import pandas as pd
+from sqlalchemy import create_engine
+
+project_root = Path(__file__).resolve().parent.parent
+load_dotenv(project_root / ".env")
+
+DB_USER = os.getenv("DB_USER")
+DB_PASS = os.getenv("DB_PASSWORD")
+DB_HOST = os.getenv("DB_HOST")
+DB_PORT = os.getenv("DB_PORT")
+DB_NAME = os.getenv("DB_NAME")
+
+
+engine = create_engine(f"mysql+pymysql://{DB_USER}:{quote_plus(DB_PASS)}@{DB_HOST}:{DB_PORT}/{DB_NAME}")
+
+excel_path = 'data/processed/cleaned_retail_intelligence_project.xlsx'
+
+sheets = ["sales", "inventory", "campaigns", "customers", "products", "stores"]
+
+for sheet in sheets:
+    df = pd.read_excel(excel_path, sheet_name=sheet.capitalize())
+    df.to_sql(name=sheet.lower(), con=engine, if_exists="replace", index=False)
+    print(f"Dados da planilha '{sheet.lower()}' carregados com sucesso para o banco de dados MySQL.")
