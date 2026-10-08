@@ -4,6 +4,8 @@ Projeto de Data Analytics desenvolvido para simular um cenário real de análise
 
 O objetivo é analisar vendas, rentabilidade, clientes, lojas, descontos, campanhas e inventário, utilizando um fluxo de trabalho completo de Data Analyst.
 
+Relatório analítico (PDF): https://github.com/Vicu130/Retail_Intelligence_Business_Analysis/blob/master/analysis/Retail_Intelligence_Business_Analysis.pdf
+
 ---
 
 ## 📌 Problema de negócio
